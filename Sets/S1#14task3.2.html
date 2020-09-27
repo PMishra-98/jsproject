@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .t1{
+                display: inline-block;
+                border: 2px;
+            }
+        </style>
+    </head>
+    <body></body>
+    <script>
+        var details =[{"name":"Mary","marks":[72,65,55,71]},
+                     {"name":"Anita","marks":[66,70,75,53]},
+                     {"name":"Edward","marks":[44,54,64,58]},
+                     {"name":"Thomas","marks":[62,55,65,81]},
+                     {"name":"Robin","marks":[41,44,47,49]},
+                     {"name":"Sophia","marks":[71,73,67,77]},
+                     {"name":"Bruce","marks":[52,57,61,64]}];
+       var j=0;
+         details.reduce((acc,curr)=>{
+                 var max=curr.marks[0];
+                 for(var i=0;i<curr.marks.length;i++){
+                     var v1 =curr.marks[i]
+                     if(v1>max){
+                        max=v1;
+                    }
+                 }
+                 curr.marks=max; 
+             },0);
+       var details1= details.filter(n=>{
+            if(n.marks>70) {
+                return j++;
+        } } );
+                  
+        console.log(details);
+        console.log(j);          
+    </script>
+</html>

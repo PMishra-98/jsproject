@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .t1 {
+            display: inline-block;
+            border: 2px;
+        }
+    </style>
+</head>
+
+<body></body>
+<script>
+    var details = [{ "name": "Mary", "marks": [72, 65, 55, 71] },
+                     { "name": "Anita", "marks": [66, 70, 75, 53] },
+                      { "name": "Edward", "marks": [44, 54, 64, 58] },
+                      { "name": "Thomas", "marks": [62, 55, 65, 81] },
+                    { "name": "Robin", "marks": [41, 44, 47, 49] },
+                   { "name": "Sophia", "marks": [71, 73, 67, 77] },
+                 { "name": "Bruce", "marks": [52, 57, 61, 64] }];
+    var v2 ='';
+    var details1 = details.reduce((acc,curr,n)=>{
+                 v1 = 0;
+                  for(var i=0;i<curr.marks.length;i++){
+                     v1 +=curr.marks[i];   
+                  }
+                 curr.marks=v1;
+                
+                    var v3 = details[0].marks;
+                    for(var j=1;j<8;j++){
+                      if(curr.marks>v3){
+                          v3 = details[j].marks;
+                          v2 = curr.name;
+                          return v2;
+                     }
+                   
+                 
+                 }
+         },0);
+          console.log(v2);
+          console.log(details);
+   </script>
+
+</html>

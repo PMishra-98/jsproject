@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <input type="text" id="date" ><br/>
+        <button  onclick="getDetails()">Details</button>
+        <button  onclick="getNext()">Next Date</button>
+        <button  onclick="getPrivious()">Privious Date</button>
+    </body>
+    <script>
+        var showdate = document.getElementById('date');
+      
+        var nextdate = document.getElementById('next');
+        var priviousdate = document.getElementById('privious');
+        var details = new Date('Feb 28, 2016');
+            var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var months = ["January", "February", "March", "April", "May", "June", "July", 
+                     "August", "September", "October", "November", "December"];
+        function getDetails(){
+            const details = new Date('Feb 28, 2016');
+           showdate.value = details.getDate()+" "+months[details.getMonth()]+" "+details.getFullYear();
+            console.log("Day",days[details.getDay()]);
+            console.log("Date",details.getDate());
+            console.log("Month",months[details.getMonth()]);
+            console.log("Year",details.getFullYear());
+        }
+        function getNext(){
+            const day = new Date(details);
+            var nextDay = new Date(day);
+            var nt  = new Date(nextDay.setDate(day.getDate() + 1));
+            details = nt;
+            showdate.value = nt.getDate()+" "+months[nt.getMonth()]+" "+nt.getFullYear();
+        }
+        function getPrivious(){
+            const day = new Date(details);
+            var nextDay = new Date(day);
+            var nt  = new Date(nextDay.setDate(day.getDate() - 1));
+            showdate.value =   showdate.value = nt.getDate()+" "+months[nt.getMonth()]+" "+nt.getFullYear();
+        }
+    </script>
+</html>

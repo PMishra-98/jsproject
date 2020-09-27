@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <style>
+        .container-fluid {
+            width: 420px;
+            height: 70px;
+            border: 2px solid black;
+            position: relative;
+        }
+
+        .row {
+            height: 10px;
+        }
+        #box1{
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background-color: red;
+            left: 0;
+        }
+        #box2, #box3,
+        #box4, #box5, #box6 {
+            position: absolute;
+            display: none;
+            width: 40px;
+            height: 10px;
+            background-color: red;
+            left: 0;
+        }
+
+        #box {
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background-color: green;
+             left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="box1" class="col-12 my-1"></div>
+        </div>
+        <div class="row">
+            <div id="box2" class="col my-1"></div>
+        </div>
+        <div class="row">
+            <div id="box3" class="col my-1"></div>
+        </div>
+        <div class="row">
+            <div id="box4" class="col my-1"></div>
+        </div>
+        <div class="row">
+            <div id="box5" class="col my-1"></div>
+        </div>
+        <div class="row">
+            <div id="box" class="col-6  my-1"></div>
+            <div id="box6" class="col-6 my-1"></div>
+        </div>
+
+    </div>
+</body>
+<script>
+    var box1 = document.getElementById('box1');
+    var box2 = document.getElementById('box2');
+    var box3 = document.getElementById('box3');
+    var box4 = document.getElementById('box4');
+    var box5 = document.getElementById('box5');
+    var box = document.getElementById('box');
+    
+    var box1left = 0;
+    var box2left = 0;
+    var box3left = 0;
+    var box4left = 0;
+    var box5left = 0;
+    var box6left = 0;
+    var boxmove = 0;
+    var i = 0;
+    var timeId = setInterval(() => {
+        i++;
+        if (i > 0 && i < 30) {
+            box1left += 13;
+            box1.style.left = box1left + 'px';
+        }
+
+        if (i > 30 && i < 60) {
+            box1.style.display="none";
+            box2.style.display="block";
+            box2left += 13;
+            box2.style.left = box2left + 'px';
+        }
+        if (i > 60 && i < 90) {
+            box2.style.display="none";
+            box3.style.display="block";
+            box3left += 13;
+            box3.style.left = box3left + 'px';
+        }
+        if (i > 90 && i < 120) {
+            box3.style.display="none";
+            box4.style.display="block";
+            box4left += 13;
+            box4.style.left = box4left + 'px';
+        }
+        if (i > 120 && i < 150) {
+            box4.style.display="none";
+            box5.style.display="block";
+            box5left += 13;
+            box5.style.left = box5left + 'px';
+        }
+        if (i > 150 && i < 180) {
+            box5.style.display="none";
+            box6.style.display="block";
+            box6left += 13;
+            box6.style.left = box6left + 'px';
+            if (i >=170) {
+                clearInterval(timeId);
+                box6.style.display = "none";
+                alert("Game Over");
+
+            }
+         }
+        
+    }, 300);
+
+    function moveBox(e) {
+        if (e.keyCode == 39) {
+            boxmove += 13;
+            box.style.left = boxmove + 'px';
+
+        }
+        if (e.keyCode == 37) {
+            boxmove -= 13;
+            box.style.left = boxmove + 'px';
+
+        }
+      
+    }
+
+    document.onkeydown = moveBox;
+</script>
+
+</html>

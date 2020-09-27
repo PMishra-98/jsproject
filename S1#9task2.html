@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body></body>
+<script>
+    var arr = ["Edufect", "Java", "Master"];
+    var len = arr.length;
+    var l = 0;
+    var m=0;
+    var n=0;
+    var temp=0;
+    for (var i = 0; i < len; i++) {
+         for(var j=i+1;j< len;j++){
+        var str = arr[i];
+        console.log(str);
+          var str2 = str.charAt(str.length-1);
+          console.log(str2);
+          if(str2=="t"){
+              temp = arr[i];
+              arr[i] =arr[j];
+              arr[j]=temp;
+
+          }
+
+       }
+    }  
+    console.log(arr);
+</script>
+
+</html>

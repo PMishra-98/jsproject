@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        .outer{
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        .imagesize{
+            width: 100px;
+            height: 200px;
+        }
+        .overlay{
+            position: absolute;
+            z-index: 2;
+        }
+       </style>
+    </head>
+    <body>
+        <button type="submit" onclick="start()">Start Again</button>
+        <div id="show"></div>
+    </body>
+    <script>
+        let image1 = [  "https://i.ibb.co/cwwg3X4/3-red.jpg",
+                     "https://i.ibb.co/3W5YvMg/4-blue.jpg",
+                     "https://i.ibb.co/W0mTkdc/4-green.jpg",
+                     "https://i.ibb.co/gm12HXN/2-green.jpg"];
+        let image2 = [ "https://i.ibb.co/ZGJDKmt/1-red.jpg",
+                     "https://i.ibb.co/S5bRz8n/2-blue.jpg",
+                     "https://i.ibb.co/ssCTJkr/3-blue.jpg",
+                     "https://i.ibb.co/5hGS3bx/3-green.jpg"];
+        let image3 = ["https://i.ibb.co/1bPyBNx/1-blue.jpg",
+                     "https://i.ibb.co/S5bRz8n/2-blue.jpg",
+                     "https://i.ibb.co/gm12HXN/2-green.jpg",
+                     "https://i.ibb.co/1Kphcg9/4-red.jpg"];
+  let div1 = document.getElementById("show");
+      var j, temp;
+      var str='';
+function random(image){
+    for(let i=image.length-1;i>=0;i--){
+      j = Math.floor(Math.random() * (i+1));
+      temp = image[i];
+        image[i] =image[j];
+       image[j] = temp;
+    }
+  }
+    
+    function start(){
+        str = str+"<div class='outer'>";
+            random(image1);
+        for(let i=0;i<image1.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image1[i]+"' style='"+styles+"'>";
+          
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+            random(image2);
+        for(let i=0;i<image2.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image2[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+            random(image3); 
+       for(let i=0;i<image3.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image3[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+       div1.innerHTML=str;
+        str='';
+    }
+    </script>
+</html>

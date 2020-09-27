@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body></body>
+<script>
+    var p1 = { "name": "Mary", "marks": [72, 65, 55, 71] };
+    var p2 = { "name": "Anita", "marks": [66, 70, 75, 53] };
+    var p3 = { "name": "Edward", "marks": [44, 54, 64, 58] };
+    var p4 = { "name": "Thomas", "marks": [62, 55, 65, 81] };
+    var p5 = { "name": "Robin", "marks": [72, 65, 55, 71] };
+    var p6 = { "name": "Sopiha", "marks": [41, 44, 47, 49] };
+    var p7 = { "name": "Bruce", "marks": [52, 57, 61, 64] };
+    var arr = [p1, p2, p3, p4, p5,p6,p7];
+
+    var len = arr.length;
+    var add = 0;
+    for (var i = 0; i < len ; i++) {
+         var num1 = arr[i].marks;
+        for(var j=0;j<4;j++){
+               add +=num1[j];
+           }
+        arr[i].marks=add;
+        console.log(add);
+        add=0;
+    }
+    var num1 = arr[0].marks;
+    console.log(num1);
+    for (var i = 0; i < len; i++) {
+            var num2 = arr[i].marks;
+            console.log("num2",num2);
+          if(num2>num1)
+              {
+                
+            }
+            else{
+              arr.splice(i,1);
+              i+1;
+            }
+       }
+     
+  
+    console.log(arr);
+</script>
+
+</html>

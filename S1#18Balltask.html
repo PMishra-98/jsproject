@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           .cell{
+                display: inline-block;
+                background-color: yellow;
+                width:40px;
+              
+                font-weight: 300;
+                margin: 3px;
+                text-align: center;
+            }
+            #mytable{
+                width: 600px;
+            }
+           button{
+               background-color: royalblue;
+             
+               
+           } 
+        </style>
+    </head>
+    <body>
+        <div id="mytable"></div>
+        <button type="submit"  onclick="increment()">+1</button>
+        <button type="submit"  onclick="decrement()">-1</button>
+
+        <button type="submit" id="incre" onclick="insertEnd()">Insert 22 at end</button>
+        <button type="submit" id="decre" onclick="insertStart()">Insert 0 at start</button>
+        <button type="submit" id="decre" onclick="removeLess()">Remove 5 or less</button>
+       <h2>Stats for each row</h2> <div id="stats"></div>
+    </body>
+    <script>
+        var arr = [[2, 3, 4, 6, 7], [3, 4, 5], [5, 10], [14], [4, 8, 12, 16]];
+        let str='';
+        let sum=0;
+        let str2 ='';
+        let table = document.getElementById('mytable');
+        
+        show();
+      function show(){
+         var k=0;
+        for(let i =0;i<arr.length;i++){
+            k++;
+            v1=arr[i];
+        for(let j=0;j<v1.length;j++){
+            str +="<div class='cell' id='d"+k+j+"' onclick='double("+k+j+")'>"+v1[j]+"</div>";
+        }
+        str +="<br/>";
+        table.innerHTML=str;
+        }
+        str='';
+        showStats();
+        }
+      
+   
+    function increment(){
+        for(let i =0;i<arr.length;i++){
+            v1=arr[i];
+        for(let j=0;j<v1.length;j++){
+            str +="<div class='cell'>"+v1[j]+++"</div>";
+        }
+        str +="<br/>";
+        table.innerHTML=str;
+        }
+       str='';
+        show();
+    }
+    function decrement(){
+        for(let i =0;i<arr.length;i++){
+            v1=arr[i];
+        for(let j=0;j<v1.length;j++){
+            str +="<div class='cell'>"+v1[j]--+"</div>";
+        }
+        str +="<br/>";
+        table.innerHTML=str;
+        }
+        str='';
+      show();
+    }
+    function insertEnd(){
+
+        for(let i =0;i<arr.length;i++){
+            v1=arr[i];
+           
+            arr[i].push(22);
+        for(let j=0;j<v1.length;j++){
+            str +="<div class='cell'>"+v1[j]+"</div>";
+        }
+        str +="<br/>";
+        table.innerHTML=str;
+        }
+        str='';
+      show();
+    }
+    function insertStart(){
+
+for(let i =0;i<arr.length;i++){
+    v1=arr[i];
+   arr[i].splice(0,0,0);
+for(let j=0;j<v1.length;j++){
+    str +="<div class='cell'>"+v1[j]+"</div>";
+}
+str +="<br/>";
+table.innerHTML=str;
+}
+str='';
+show();
+}
+function removeLess(){
+    for(let i =0;i<arr.length;i++){
+    v1=arr[i];
+for(let j=0;j<v1.length;j++){
+    if(v1[j]<=4){
+        console.log("re",v1[j]);
+        v1.splice(j,1);
+      j=-1;
+    }
+   else{
+    console.log(v1[j]);
+    str +="<div class='cell'>"+v1[j]+"</div>";
+   }
+}
+str +="<br/>";
+table.innerHTML=str;
+}
+str='';
+show();
+}
+
+function double(number){
+        let num = document.getElementById('d'+number);
+         var mul = num.innerText;
+         num.innerHTML=mul*mul;
+   }
+ 
+function showStats(){
+    for(let i =0;i<arr.length;i++){
+         v1=arr[i];
+        
+        for(let j=0;j<v1.length;j++){
+           sum +=v1[j]; 
+        
+        }
+        str2 += "Sum: "+sum+", "+"Count: "+v1.length+", "+"Max: "+arr[i][v1.length-1]+", "+"Min: "+arr[i][0]+"<br/>";
+       let stats=document.getElementById('stats');
+       stats.innerHTML =str2;
+        sum=0;
+     
+    }
+    str2='';
+}
+    </script>
+</html>

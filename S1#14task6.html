@@ -1,0 +1,26 @@
+<!Doctype html>
+<html>
+    <head></head>
+    <body></body>
+    <script>
+        var details = [{model: "Swift Dzire VXi", make: "Maruti", fuel: "Diesel", colors: ["White", "Silver", "Blue", "Red"]},
+                      {model: "Etios SMi", make: "Toyota", fuel: "Diesel", colors: ["White", "Grey", "Black"]},
+                      {model: "City AXi", make: "Honda", fuel: "Petrol", colors: ["Grey", "Blue", "Black"]},
+                      {model: "Swift DXi", make: "Maruti", fuel: "Diesel", colors: ["White", "Red", "Black"]},
+                      {model: "Etios VXi", make: "Toyota", fuel: "Diesel", colors: ["White", "Silver", "Black", "Yellow"]},
+                      {model: "City ZXi", make: "Honda", fuel: "Petrol", colors: ["Silver", "Blue", "Red"]},
+                      {model: "Alto SXi", make: "Maruti", fuel: "Petrol", colors: ["White", "Red","Blue", "Yellow"]},
+                      {model: "Alto VXi", make: "Maruti", fuel: "Petrol", colors: ["White", "Silver", "Yellow", "Black"]}];
+        var v1 =[];              
+        var color1 = 'Grey';
+        var details1 = details.filter(c=>{
+            for(var i=0;i<c.colors.length;i++){
+                if(c.colors[i]==color1){
+                   v1.push(c.model);
+                    return v1;
+                }
+            }
+        });
+        console.log(v1);
+    </script>
+</html>

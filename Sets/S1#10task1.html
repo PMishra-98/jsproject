@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body></body>
+    <script>
+        var person=[{"name":"Mary","city":"London"},
+                    {"name":"Anita","city":"Paris"},
+                    {"name":"Edward","city":"New York"},
+                    {"name":"Thomas","city":"Rome"},
+                    {"name":"Robin","city":"Seattle"},
+                    {"name":"Sophia","city":"Los Angeles"},
+                    {"name":"Bruce","city":"Delhi"}];
+        var details = [{"city":"London","continent":"Europe"},
+                          {"city":"Delhi","continent":"Asia"},
+                          {"city":"Seattle","continent":"North America"},
+                          {"city":"Paris","continent":"Europe"},
+                          {"city":"New York","continent":" North America"},
+                          {"city":"Rome","continent":"Europe"},
+                          {"city":"Bengaluru","continent":"Asia"},
+                          {"city":"Los Angeles","continent":"North America"}];          
+         
+        let count='Europe';
+        var person1 = person.filter(n1=>filterCompare(n1,count));
+        console.log(person1);
+       
+        function filterCompare(city1, count1){
+           var v1 = city1.city;
+           var v3='';
+           var v4='';
+            for(var i=0;i<8;i++){
+               var v2 =details[i];
+               v3=v2.continent;
+               if(v3==count1){
+                  if(v1==v2.city){
+                     if(v1==v2.city){
+                     return true;
+                  }
+                  else{
+                     return false;
+                  }
+               }
+            }
+            }
+        }
+         
+     </script>
+</html>

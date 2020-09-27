@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .cell {
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            background-color: whitesmoke;
+            margin: 0px;
+            font-weight: inherit;
+            position: relative;
+            border: 0.5px solid gray;
+        }
+
+        .cell:hover {
+            background-color: lightgreen;
+        }
+
+        .shift {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        h2 {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        h3 {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Collect X</h2>
+    </div>
+    <div>
+        <h3>Collect as many X as one can in 10 seconds</h3>
+    </div>
+    <button onclick="start()">START</button>
+    <div class="shift">Time: <div id="time"></div>
+    </div>
+    <div class="shift">Score: <div id="score"></div>
+    </div>
+    <div id="table"></div>
+
+</body>
+<script>
+    var arr1 = [0, 0, 0, 0, 0];
+    var arr2 = [0, 0, 0, 0, 0];
+    var arr3 = [0, 0, 0, 0, 0];
+    var arr4 = [0, 0, 0, 0, 0];
+    var arr5 = [0, 0, 0, 0, 0];
+    var arr6 = [0, 0, 0, 0, 0];
+    var arr7 = [0, 0, 0, 0, 0];
+    var arr8 = [0, 0, 0, 0, 0];
+    var num = '';
+    var i = 0;
+    var j = 0;
+    var timestart = 0;
+    var stratscore = 0;
+   
+    mytable();
+
+
+
+    function mytable() {
+        for (var i = 0; i < 5; i++) {
+            var col1 = "<div id=" + 'j' + i + " class='cell' onclick=show(" + 'j' + i + ")>" + arr1[i] + "</div>";
+            var col2 = "<div id=" + 'k' + i + " class='cell' onclick=show(" + 'k' + i + ") >" + arr2[i] + "</div>";
+            var col3 = "<div id=" + 'l' + i + " class='cell' onclick=show(" + 'l' + i + ") >" + arr3[i] + "</div>";
+            var col4 = "<div id=" + 'm' + i + " class='cell' onclick=show(" + 'm' + i + ") >" + arr4[i] + "</div>";
+            var col5 = "<div id=" + 'n' + i + " class='cell' onclick=show(" + 'n' + i + ") >" + arr5[i] + "</div>";
+            var col6 = "<div id=" + 'o' + i + " class='cell' onclick=show(" + 'o' + i + ") >" + arr6[i] + "</div>";
+            var col7 = "<div id=" + 'p' + i + " class='cell' onclick=show(" + 'p' + i + ") >" + arr7[i] + "</div>";
+            var col8 = "<div id=" + 'q' + i + " class='cell' onclick=show(" + 'q' + i + ") >" + arr8[i] + "</div>";
+            var row = "<div>" + col1 + col2 + col3 + col4 + col5 + col6 + col7 + col8 + "</div>";
+            num = num + row;
+        }
+        var table = document.getElementById('table');
+        table.innerHTML = num;
+    }
+
+    function randomNumber(minimum, maximum) {
+        return Math.round(Math.random() * (maximum - minimum) + minimum);
+    }
+
+
+    function start() {
+        for (var i = 0; i < 6; i++)
+            if (randomNumber(0, 1) == 1) {
+                break;
+            }
+        var showx = document.getElementById('l' + i);
+        showx.innerHTML = 'X';
+        stratscore=1;
+        document.getElementById('score').innerHTML = stratscore;
+        showx.style.backgroundColor = "#00FF7F";
+        var downloadTimer = setInterval(function () {
+            timestart += 1;
+            document.getElementById('time').innerHTML = timestart;
+            if (timestart >= 10) {
+                clearInterval(downloadTimer);
+            }
+        }, 1000);
+    }
+
+
+    function show(number) {
+        let k = randomNumber(0, 1);
+        if (k == 1) {
+
+            number.innerHTML = 'X';
+
+            i++;
+        }
+        else {
+            j++;
+        }
+        score = i - j + stratscore;
+        console.log(score);
+        document.getElementById('score').innerHTML = score;
+        if (timestart == 10) {
+            alert("Game is over. Your score is " + score);
+        }
+     
+    }
+
+</script>
+
+</html>

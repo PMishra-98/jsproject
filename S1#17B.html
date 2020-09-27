@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <style>
+        h2 {
+            font-weight: bold;
+            font-size: 40px;
+        }
+
+        .tm {
+            display: flex;
+            float: left;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .lv {
+            float: right;
+            display: flex;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .text-center {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .cell1 {
+            border: 1px solid black;
+            display: inline-block;
+            background-color: #00FA9A;
+            width: 45px;
+            height: 45px;
+            margin: 2px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .cell2 {
+            border: 1px solid black;
+            display: inline-block;
+            background-color: yellow;
+            font-size: 20px;
+            width: 30px;
+            height: 30px;
+            margin: 2px;
+        }
+
+        .cell2:hover {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <hr class="mr bg-dark h-100">
+    <div class="text-center">
+        <h2>Tech Hangama</h2>
+    </div>
+    <div class="tm">Time: <div id="time">0</div>
+    </div>
+    <div class="lv">Lives: <div id="lives">0</div>
+    </div><br /><br /><br />
+    <div class="text-center">Guess the word commonly used in Technology</div><br /><br />
+    <div class="text-center" id="words"></div><br /><br />
+    <div class="text-center" type="" id="alphabate"></div>
+
+</body>
+<script>
+    var arr = ["PYTHON", "ANDROID", "REACT", "SOFTWARE", "ANGULAR", "SCRIPT", "KEYBOARD", "SERVER",
+        "BROWSER", "NETWORK", "ROUTER", "LINUX", "WINDOWS", "JAVASCRIPT"];
+    var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    var words = document.getElementById('words');
+    var alphabate = document.getElementById('alphabate');
+    var lives =  document.getElementById('lives');
+    var techno = '';
+    var str1 = '';
+    var str2 = '';
+    var str = '';
+    var live='';
+    var timestart=0;
+    show();
+    var downloadTimer = setInterval(function () {
+            timestart += 1;
+           var time =  document.getElementById('time').innerHTML = timestart;
+          
+        }, 1000);
+    function show() {
+        randomArr();
+        lives.innerHTML=techno.length;
+        for (var i = 0; i < techno.length; i++) {
+            var s1 = techno.charAt(i);
+            str1 += "<div id=" + 'r' + i + " class='cell1'>_</div>";
+
+        }
+        words.innerHTML = str1;
+        
+        for (var j = 0; j < alpha.length; j++) {
+            str3 = alpha[j];
+            str2 += "<div class='cell2' id=" + 'a' + j + " onclick='callAlpha(" +j+ ")'>" + alpha[j] + "</div>";
+        }
+        alphabate.innerHTML = str2;
+    }
+
+    function randomArr() {
+        techno = arr[Math.floor(Math.random() * arr.length)];
+    }
+var j=0;
+    function callAlpha(num) {
+        var len = techno.length
+        console.log(techno);
+        var str = document.getElementById('a'+num);
+    for(var i=0;i<techno.length;i++){
+        if(str.innerText==techno.charAt(i)){
+              str.style.backgroundColor='#00FA9A';
+               document.getElementById('r'+i).innerHTML=str.innerText;
+               j++;
+             
+             break;
+          }
+       else{ 
+      
+        if(techno.length-1==i){
+            lives.innerHTML=lives.innerText-1;
+             }  
+            str.style.backgroundColor='pink'; 
+            str.style.pointerEvents = 'none';
+           }
+    
+        } 
+    if(lives.innerText==-1){
+                  clearInterval(downloadTimer);
+                  alert("Game Over!! You Lost!! The words "+techno);
+             }
+   else{    
+       if(techno.length==j){
+        clearInterval(downloadTimer);
+                var per = Math.round(lives.innerText/techno.length*100);
+                  alert("Congrats!! You scored "+per+" points. You took "+time.innerText+" seconds");
+       }
+               
+     }
+    }
+   
+</script>
+
+</html>

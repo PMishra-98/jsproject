@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        .outer{
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        .cell{
+            display: inline-block;
+            width: 160px;
+            margin-right: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .imagesize{
+            width: 150px;
+            height: 200px;
+           border:2px solid black;
+        }
+        .overlay{
+            position: absolute;
+            z-index: 2;
+        }
+       </style>
+    </head>
+    <body>
+        <button type="submit" onclick="start()" style="background-color: black;color: white;">Start Again</button>
+        <div  id="sum"></div>
+        <div id="show"></div>
+    </body>
+    <script>
+      
+      let images =[{value : 1, color : "blue", image : "https://i.ibb.co/1bPyBNx/1-blue.jpg"},
+                     {value : 1, color : "green", image : "https://i.ibb.co/5k4cDYm/1-green.jpg"},
+                     {value : 1, color : "red", image : "https://i.ibb.co/ZGJDKmt/1-red.jpg"},
+                     {value : 2, color : "blue", image : "https://i.ibb.co/S5bRz8n/2-blue.jpg"},
+                     {value : 2, color : "green", image : "https://i.ibb.co/gm12HXN/2-green.jpg"},
+                     {value : 2, color : "red", image : "https://i.ibb.co/VWnvwqM/2-red.jpg"},
+                     {value : 4, color : "green", image : "https://i.ibb.co/W0mTkdc/4-green.jpg"},
+                     {value : 4, color : "red", image : "https://i.ibb.co/1Kphcg9/4-red.jpg"},
+                     {value : 5, color : "blue", image : "https://i.ibb.co/GVhc56P/5-blue.jpg"},
+                     {value : 5, color : "green", image : "https://i.ibb.co/G3zYcMQ/5-green.jpg"},
+                     {value : 5, color : "red", image : "https://i.ibb.co/Zzzssy2/5-red.jpg"},
+                     {value : 6, color : "blue", image : "https://i.ibb.co/jg2Hgxb/6-blue.jpg"},
+                     {value : 6, color : "green", image : "https://i.ibb.co/py7SpN9/6-green.jpg"},
+                     {value : 6, color : "red", image : "https://i.ibb.co/7N5bydC/6-red.jpg"},
+                     {value : 1, color : "blue", image : "https://i.ibb.co/1bPyBNx/1-blue.jpg"},
+                     {value : 1, color : "green", image : "https://i.ibb.co/5k4cDYm/1-green.jpg"},
+                     {value : 1, color : "red", image : "https://i.ibb.co/ZGJDKmt/1-red.jpg"},
+                     {value : 2, color : "blue", image : "https://i.ibb.co/S5bRz8n/2-blue.jpg"},
+                     {value : 2, color : "green", image : "https://i.ibb.co/gm12HXN/2-green.jpg"},
+                     {value : 2, color : "red", image : "https://i.ibb.co/VWnvwqM/2-red.jpg"},
+                     {value : 3, color : "blue", image : "https://i.ibb.co/ssCTJkr/3-blue.jpg"},
+                     {value : 3, color : "green", image : "https://i.ibb.co/5hGS3bx/3-green.jpg"},
+                     {value : 3, color : "blue", image : "https://i.ibb.co/ssCTJkr/3-blue.jpg"},
+                     {value : 3, color : "green", image : "https://i.ibb.co/5hGS3bx/3-green.jpg"},
+                     {value : 3, color : "red", image : "https://i.ibb.co/cwwg3X4/3-red.jpg"},
+                     {value : 4, color : "blue", image : "https://i.ibb.co/3W5YvMg/4-blue.jpg"},
+                     {value : 3, color : "red", image : "https://i.ibb.co/cwwg3X4/3-red.jpg"},
+                     {value : 4, color : "blue", image : "https://i.ibb.co/3W5YvMg/4-blue.jpg"},
+                     {value : 4, color : "green", image : "https://i.ibb.co/W0mTkdc/4-green.jpg"},
+                     {value : 4, color : "red", image : "https://i.ibb.co/1Kphcg9/4-red.jpg"},
+                     {value : 5, color : "blue", image : "https://i.ibb.co/GVhc56P/5-blue.jpg"},
+                     {value : 5, color : "green", image : "https://i.ibb.co/G3zYcMQ/5-green.jpg"},
+                     {value : 5, color : "red", image : "https://i.ibb.co/Zzzssy2/5-red.jpg"},
+                     {value : 6, color : "blue", image : "https://i.ibb.co/jg2Hgxb/6-blue.jpg"},
+                     {value : 6, color : "green", image : "https://i.ibb.co/py7SpN9/6-green.jpg"},
+                     {value : 6, color : "red", image : "https://i.ibb.co/7N5bydC/6-red.jpg"}];
+     let image1 =[];
+    let image2= [];
+    let image3=[];
+    let image4=[];
+    let image5=[];
+    let image6=[];
+   let lastdrag=[];
+  var blank={value : 0, color : "blank", image : "https://i.ibb.co/7V82p6m/Blank.jpg"};
+  let div1 = document.getElementById("show");
+  let div2 = document.getElementById("sum");
+  let v1 =document.getElementById('drag1');
+      var m, temp;
+      var str='';
+      var sum='';
+      var select=[];
+      var j=0,k=0,l=0;
+      var d1='drag1',d2='drag2',d3='drag3',d4='drag4',d5='drag5',d6='drag6';
+      arrayDevide();
+ function arrayDevide(){
+     for(let i=0;i<images.length;i++){
+         if(image1.length<6){
+             image1.push(images[i]);
+         }
+        else if(image2.length<6){
+             image2.push(images[i]);
+         }
+        else if(image3.length<6){
+             image3.push(images[i]);
+         }
+        else if(image4.length<6){
+             image4.push(images[i]);
+         }
+        else if(image5.length<6){
+             image5.push(images[i]);
+         }
+        else if(image6.length<6){
+             image6.push(images[i]);
+         }
+     }
+ }
+    show();
+function start(){
+    for(let i=images.length-1;i>=0;i--){
+      j = Math.floor(Math.random() * (i+1));
+      temp = images[i];
+        images[i] =images[m];
+       images[m] = temp;
+    }
+    image1.splice(0,5);
+   image2.splice(0,5);
+   image3.splice(0,5);
+   image4.splice(0,5);
+   image5.splice(0,5);
+   image6.splice(0,5);
+    arrayDevide();
+     show();
+  }
+  function selectDrag(imageDrop,drag){
+    lastdrag=[];
+    for(var i=drag;i<imageDrop.length;i++){
+       
+            lastdrag.push(imageDrop[i]);
+        }
+    }
+  
+ 
+  function dropAdd(imgDrop,imgDrag,id1,id2,dragImageIndex){
+    if(imgDrop[imgDrop.length-1].value==0||id1==id2&&imgDrop[imgDrop.length-1].color==imgDrag[dragImageIndex].color){
+        for(var i=dragImageIndex;i<imgDrag.length;i++){
+        if(imgDrag[i].color==imgDrag[dragImageIndex].color){
+
+         }
+        else{
+            alert("All the cards being draged are not same color");
+            return false;
+        } 
+        }
+        if(imgDrop[imgDrop.length-1].value==0){
+            imgDrop.splice(imgDrop.length-1,1);
+         }
+       for(let i=0;i<lastdrag.length;i++){
+        imgDrop.push(lastdrag[i]);
+       }
+       imgDrag.splice(dragImageIndex,lastdrag.length);
+    }
+
+    else{
+            alert("Cards can be dropeed onto the same color only");
+            return false;
+        }
+  }
+  function allowDrop(ev){
+            ev.preventDefault();
+        }
+function drag(ev, dragIndex){
+ dragImageIndex=dragIndex;
+  id=ev.target.id;
+if(d1==id)
+    selectDrag(image1,dragImageIndex);
+ else if(d2==id)
+    selectDrag(image2,dragImageIndex);
+else if(d3==id)
+    selectDrag(image3,dragImageIndex);
+else if(d4==id)
+     selectDrag(image4,dragImageIndex);
+else if(d5==id)
+     selectDrag(image5,dragImageIndex);
+else if(d6==id)
+     selectDrag(image6,dragImageIndex);
+    }
+function drop1(ev,dropIndex){
+  ev.preventDefault();
+  if(d2==id){
+    dropAdd(image1,image2,d2,id,dragImageIndex);
+   }
+  else if(d3==id){
+    dropAdd(image1,image3,d3,id,dragImageIndex);
+   }
+ else if(d4==id){
+    dropAdd(image1,image4,d4,id,dragImageIndex);
+   }
+else if(d5==id){
+    dropAdd(image1,image5,d5,id,dragImageIndex);
+   }
+else if(d6==id){
+    dropAdd(image1,image6,d6,id,dragImageIndex);
+   }
+         dragImageIndex=-1;
+           show();
+        }
+ function drop2(ev,dropIndex){
+  ev.preventDefault();
+   if(d1==id){
+    dropAdd(image2,image1,d1,id,dragImageIndex);
+   }
+  else if(d3==id){
+    dropAdd(image2,image3,d3,id,dragImageIndex);
+   }
+ else if(d4==id){
+    dropAdd(image2,image4,d4,id,dragImageIndex);
+   }
+else if(d5==id){
+    dropAdd(image2,image5,d5,id,dragImageIndex);
+   }
+else if(d6==id){
+    dropAdd(image2,image6,d6,id,dragImageIndex);
+   }
+         dragImageIndex=-1;
+           show();
+        }
+function drop3(ev,dropIndex){
+  ev.preventDefault();
+  if(d1==id){
+    dropAdd(image3,image1,d1,id,dragImageIndex);
+   }
+  else if(d2==id){
+    dropAdd(image3,image2,d2,id,dragImageIndex);
+   }
+ else if(d4==id){
+    dropAdd(image3,image4,d4,id,dragImageIndex);
+   }
+else if(d5==id){
+    dropAdd(image3,image5,d5,id,dragImageIndex);
+   }
+else if(d6==id){
+    dropAdd(image3,image6,d6,id,dragImageIndex);
+   }
+         dragImageIndex=-1;
+           show();
+        }
+function drop4(ev,dropIndex){
+  ev.preventDefault();
+  if(d1==id){
+    dropAdd(image4,image1,d1,id,dragImageIndex);
+   }
+  else if(d2==id){
+    dropAdd(image4,image2,d2,id,dragImageIndex);
+   }
+ else if(d3==id){
+    dropAdd(image4,image3,d3,id,dragImageIndex);
+   }
+else if(d5==id){
+    dropAdd(image4,image5,d5,id,dragImageIndex);
+   }
+else if(d6==id){
+    dropAdd(image4,image6,d6,id,dragImageIndex);
+   }
+      
+         dragImageIndex=-1;
+           show();
+        }
+ function drop5(ev,dropIndex){
+  ev.preventDefault();
+  if(d1==id){
+    dropAdd(image5,image1,d1,id,dragImageIndex);
+   }
+  else if(d2==id){
+    dropAdd(image5,image2,d2,id,dragImageIndex);
+   }
+ else if(d3==id){
+    dropAdd(image5,image3,d3,id,dragImageIndex);
+   }
+else if(d4==id){
+    dropAdd(image5,image4,d4,id,dragImageIndex);
+   }
+else if(d6==id){
+    dropAdd(image5,image6,d6,id,dragImageIndex);
+   }
+         dragImageIndex=-1;
+           show();
+        }
+function drop6(ev,dropIndex){
+  ev.preventDefault();
+  if(d1==id){
+    dropAdd(image6,image1,d1,id,dragImageIndex);
+   }
+  else if(d2==id){
+    dropAdd(image6,image2,d2,id,dragImageIndex);
+   }
+ else if(d3==id){
+    dropAdd(image6,image3,d3,id,dragImageIndex);
+   }
+else if(d5==id){
+    dropAdd(image6,image5,d5,id,dragImageIndex);
+   }
+else if(d4==id){
+    dropAdd(image6,image4,d4,id,dragImageIndex);
+   }
+         dragImageIndex=-1;
+           show();
+        }
+    
+    function show(){
+        
+        var s1=0,s2=0,s3=0,s4=0,s5=0,s6=0; 
+       addBlank();
+       str = str+"<div class='outer'>";
+          for(let i=0;i<image1.length;i++){
+             let styles =  "top:"+i*30+"px";
+             s1 += image1[i].value;
+             str = str +"<img class='imagesize overlay' src='"+image1[i].image+"' style='"+styles+"' id='drag1' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop1(event,"+i+")' ondragover='allowDrop(event)'>";
+           }
+        
+        sum +="<div class='cell'>"+s1+"</div>";
+        str = str+"</div>";
+       
+        str =str+"<div class='outer'>";
+       
+        for(let i=0;i<image2.length;i++){
+            s2 += image2[i].value;
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image2[i].image+"' style='"+styles+"' id='drag2' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop2(event,"+i+")' ondragover='allowDrop(event)'>";
+        }
+        sum +="<div class='cell'>"+s2+"</div>";
+        str = str+"</div>";
+        
+        str =str+"<div class='outer'>";
+         for(let i=0;i<image3.length;i++){
+           s3 += image3[i].value;
+           let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image3[i].image+"' style='"+styles+"' id='drag3' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop3(event,"+i+")' ondragover='allowDrop(event)'>";
+        }
+        sum +="<div class='cell'>"+s3+"</div>";
+        str = str+"</div>";
+       
+        str =str+"<div class='outer'>";
+             for(let i=0;i<image4.length;i++){
+              
+               s4 += image4[i].value;
+               let styles =  "top:"+i*30+"px";
+                str = str + "<img class='imagesize overlay' src='"+image4[i].image+"' style='"+styles+"' id='drag4' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop4(event,"+i+")' ondragover='allowDrop(event)'>";
+            }
+            sum +="<div class='cell'>"+s4+"</div>";
+            str = str+"</div>";
+           
+            str =str+"<div class='outer'>";
+            for(let i=0;i<image5.length;i++){
+               
+               s5 += image5[i].value;
+               let styles =  "top:"+i*30+"px";
+                str = str + "<img class='imagesize overlay' src='"+image5[i].image+"' style='"+styles+"' id='drag5' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop5(event,"+i+")' ondragover='allowDrop(event)'>";
+            }
+            sum +="<div class='cell'>"+s5+"</div>";
+            str = str+"</div>";
+           
+            str =str+"<div class='outer'>";
+           for(let i=0;i<image6.length;i++){
+           
+               s6 += image6[i].value;
+                let styles =  "top:"+i*30+"px";
+                str = str + "<img class='imagesize overlay' src='"+image6[i].image+"' style='"+styles+"' id='drag6' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop6(event,"+i+")' ondragover='allowDrop(event)'>";
+            }
+            sum +="<div class='cell'>"+s6+"</div>";
+            str = str+"</div>";
+       div2.innerHTML=sum;
+       div1.innerHTML= str;
+       str='';
+        sum='';
+    j=0;
+    k=0;
+    l=0;
+
+    }
+    function addBlank(){
+      if(image1.length==0){
+                  image1.splice(0,0,blank);
+              }
+        if(image2.length==0){
+                  image2.splice(0,0,blank);
+              }
+         if(image3.length==0){
+                  image3.splice(0,0,blank);
+              }
+         if(image4.length==0){
+                  image4.splice(0,0,blank);
+              }
+        if(image5.length==0){
+                  image5.splice(0,0,blank);
+              }
+        if(image6.length==0){
+                  image6.splice(0,0,blank);
+              }
+    }
+   
+    </script>
+</html>

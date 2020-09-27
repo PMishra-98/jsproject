@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900,900i"
+        type="text/css" media="all">
+    <style>
+        #ddsample {
+            width: 600px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <button type="submit" onclick="randomShow()">Arrange Randomly</button>
+    <div id="ddsample"></div><br /><br />
+    <div>My Favorites
+        <ul>
+            <li id="dd0">No Favorites</li>
+            <li id="dd1">No Favorites</li>
+            <li id="dd2">No Favorites</li>
+            <li id="dd3">No Favorites</li>
+        </ul>
+    </div>
+
+
+</body>
+<script>
+    let movies = [{ name: "Black Panther", image: "https://i.ibb.co/M98B0Pg/blackpanther.jpg" },
+    { name: "Captain America", image: "https://i.ibb.co/tD3XYST/captainamerica.jpg" },
+    { name: "Fantastic Beasts", image: "https://i.ibb.co/3fFJ2BX/fantastic.jpg" },
+    { name: "Frozen", image: "https://i.ibb.co/WzhdMrf/frozen.jpg" },
+    { name: "GI Joe", image: "https://i.ibb.co/s2MzrKQ/gijoe.jpg" },
+    { name: "Harry Potter", image: "https://i.ibb.co/m8stVHL/harrypotter.jpg" },
+    { name: "Hulk", image: "https://i.ibb.co/09X24qh/hulk.jpg" },
+    { name: "Inception", image: "https://i.ibb.co/chb6MyP/inception.jpg" },
+    { name: "Interstellar", image: "https://i.ibb.co/CsQ9KH3/interstellar.jpg" },
+    { name: "Iron Man", image: "https://i.ibb.co/5Lr8kxH/ironman.jpg" },
+    { name: "John Carter", image: "https://i.ibb.co/ph5FTwr/johncarter.jpg" },
+    { name: "Logan", image: "https://i.ibb.co/XXLnRB1/logan.jpg" }];
+    let movies1 = ["Captain America", "Frozen", "John Carter", "Interstellar"];
+    let block2 = ["https://i.ibb.co/XW3TtDS/blank.jpg", "https://i.ibb.co/XW3TtDS/blank.jpg",
+        "https://i.ibb.co/XW3TtDS/blank.jpg", "https://i.ibb.co/XW3TtDS/blank.jpg"];
+    let dragImageIndex = -1;
+    var arr = [];
+    var copymovies = [...movies];
+    var copyblock2 = [...block2]
+  showImage();
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    function drag(ev, dragIndex) {
+        dragImageIndex = dragIndex;
+    }
+    function drop(ev, dropIndex) {
+        ev.preventDefault();
+        var block1 = movies[dragImageIndex].image;
+        for (let i = 0; i < movies1.length; i++) {
+            if (movies1[i] == movies[dragImageIndex].name) {
+                block2[dropIndex] = block1;
+                document.getElementById('dd' + dropIndex).innerHTML = movies[dragImageIndex].name;
+                movies.splice(dragImageIndex, 1);
+            }
+        }
+
+        dragImageIndex = -1;
+        showImage();
+    }
+    function showDragImage(myIndex, img) {
+        return "<img class='myImgStyle1' src='" + img + "'" +
+            "draggable='true'"
+            + "style='width:100px' ondragstart='drag(event," + myIndex + ")'/>";
+    }
+    function showDropImage(myIndex, img) {
+        return "<img class='myImgStyle2' src='" + img + "'" +
+            "style='width:100px' ondrop='drop(event," + myIndex + ")'" +
+            "ondragover='allowDrop(event)'/>";
+    }
+    function randomShow() {
+        movies = copymovies;
+        for (let i = movies.length - 1; i >= 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = movies[i];
+            movies[i] = movies[j];
+            movies[j] = temp;
+        }
+        showImage();
+    }
+    function showImage() {
+        let str = "";
+        let div1 = document.getElementById("ddsample");
+        div1.innerHTML = '';
+        for (let i = 0; i < movies.length; i++) {
+            let block1 = movies[i]
+            str = str + showDragImage(i, block1.image);
+
+        }
+        str = str + "<br/>";
+        for (let i = 0; i < 4; i++) {
+
+            str = str + showDropImage(i, block2[i]);
+        }
+
+        div1.innerHTML = str;
+        str = '';
+    }
+
+
+
+</script>
+
+</html>

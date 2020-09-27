@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <style>
+           
+            body{
+                background-color: wheat;
+            }
+        </style>
+   </head>
+         <body > <h3>Check your typing</h3><br/>
+                <p >
+                <input type="radio" onchange="change1()">Beginer
+                <input type="radio" onchange="change2()">Novice
+                <input type="radio" onchange="change3()">Expert<br/>
+                </p>
+                
+                <h4 class="dd">  <p>Typed the following text</p>
+                 <div id="txt"></div><br/></h5> 
+              <input type="text" id="text">  
+              <div id="output" > Time :  00.000 </div> 
+                <button id="start"  onclick="start()"> Start </button> 
+                <button id="stop"  onclick="stop()"> Done </button>
+             
+ </body>
+     <script>
+        var time=0;
+        var running=0;
+        var Time=0;
+        var sentance ='';
+        function change1(){
+            sentance = document.getElementById('txt').innerHTML = "My first sentence";
+           
+        }
+        function change2(){
+            sentance = document.getElementById('txt').innerHTML = "My typing is becoming better";
+        }
+        function change3(){
+            sentance = document.getElementById('txt').innerHTML = "I can type fast now. I am very happy!";
+        }
+        function start(){
+          if(running==0){
+            running=1;
+           increment();
+          }
+        }
+       function stop(){
+         running=0;
+        var str =document.getElementById('text').value;
+         if(sentance==str){
+             alert("Your trying was correct. You took"+Time+"Seconds");
+         }
+         else{
+            alert("Error in Typing... Try Again");
+         }
+           }
+        function increment(){
+            if(running==1){
+                  setTimeout(function(){
+                      time++;
+                     
+                      var mins = Math.floor(time/10/100);
+                      var secs = Math.floor(time/10%200);
+                      
+                      if(secs<100){
+                          sece = '0'+secs;
+                      }
+                    
+                        document.getElementById('output').innerHTML="Time "+mins+"."+secs;
+                        Time = mins+"."+secs;
+                       increment();
+                  },5);
+            }
+        }
+     </script>
+ </html> 

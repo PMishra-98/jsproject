@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .mytable {
+            display: inline-block;
+            margin: 1px;
+            border: 1px solid black;
+            width: 30%;
+            padding: 1px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ele1"></div>
+   <div id = "ele2"></div>
+</body>
+<script>
+
+    var arr = [{ "name": "Mary", "marks": 72 },
+    { "name": "Anita", "marks": 75 },
+    { "name": "Thomas", "marks": 81 },
+    { "name": "Bruce", "marks": 64 }];
+    var v1 = '';
+    var arr1 = document.getElementById('ele1');
+    var arr2 = document.getElementById('ele2');
+
+    arr1.innerHTML = arr.map(n => {
+        return (
+            v1 = "<div class='mytable'>" + n.name + "</div>" + "<div class='mytable'>" + n.marks + "</div>" +
+            "<div class='mytable'><button onclick=show()>Show Below</button></div>"
+        )
+    })
+   function show(){
+      for(var i=0;i<4;i++){
+          if(arr[i].name=="Anita"){
+             arr2.innerHTML = arr[i].name+" Score "+arr[i].marks;
+          }
+      }
+   }
+
+
+
+
+
+</script>
+
+</html>

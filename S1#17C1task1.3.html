@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+  
+</head>
+<style>
+    .myImgStyle {
+        width: 100px;
+        height: 100px;
+        background-color: lightpink;
+    }
+</style>
+
+<body>
+    <div id="ddsample"></div>
+</body>
+<script>
+    let block1 = ["https://i.ibb.co/gjW4SNt/1.png",
+        "https://i.ibb.co/db7zRQw/2.png",
+        "https://i.ibb.co/9wjGNxz/3.png"];
+    let block2 = ["", "", ""];
+    let dragImageIndex = -1;
+    show();
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    function drag(ev, dragIndex) {
+        dragImageIndex = dragIndex;
+    }
+    function drop(ev, dropIndex) {
+        ev.preventDefault();
+        block2[dropIndex] = block1[dragImageIndex];
+        block1[dragImageIndex] = "";
+        dragImageIndex = -1;
+        show();
+    }
+    function showDragImage(myIndex, img) {
+        return "<img class='myImgStyle' src='" + img + "'" +
+            "draggable='true'" +
+            "ondragstart='drag(event," + myIndex + ")'/>";
+    }
+    function showDropImage(myIndex, img) {
+        return "<img class='myImgStyle' src='" + img + "'" +
+            "ondrop='drop(event," + myIndex + ")'" +
+            "ondragover='allowDrop(event)'/>";
+    }
+    function show() {
+        let str = "";
+        for (let i = 0; i < block1.length; i++) {
+            str = str + showDragImage(i, block1[i]);
+        }
+        str = str + "<br/>";
+        for (let i = 0; i < block2.length; i++) {
+            str = str + showDropImage(i, block2[i]);
+        }
+        let div1 = document.getElementById("ddsample");
+        div1.innerHTML = str;
+    }
+</script>
+
+</html>

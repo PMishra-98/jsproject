@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body></body>
+    <script>
+          let arr=["Hello","React","Java","Python","Hibernate", "JavaScript"];
+         let ch='y';
+         let x1 = arr.find(a1=>Tlast(a1,ch));
+         let x2=arr.findIndex(a1=>Tlast(a1,ch));
+         console.log(x1);
+         console.log(x2);
+         function Tlast(a1,ch2){
+             var str='';
+             for(var i=0;i<a1.length;i++){
+                   str = a1.charAt(i);
+                   if(str==ch2){
+                       break;
+                   }
+             }
+           return a1.charAt(i)===ch2;
+         }
+       
+    </script>
+</html>

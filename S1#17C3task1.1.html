@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        .outer{
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        .imagesize{
+            width: 100px;
+            height: 200px;
+        }
+        .overlay{
+            position: absolute;
+            z-index: 2;
+        }
+       </style>
+    </head>
+    <body>
+        <div id="show"></div>
+    </body>
+    <script>
+        let image = ["https://i.ibb.co/cLV4RvX/google-pixel-3.jpg","https://i.ibb.co/y6dk6n1/mi-redmi-y2.jpg",
+                    "https://i.ibb.co/160YSpk/mi-redmi-5.jpg",];
+        let div1 = document.getElementById("show");
+        let str = "Image with Different Overlays<br/>";
+        str = str+"<div class='outer'>";
+        for(let i=0;i<image.length;i++){
+            let styles =  "left:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+       
+        for(let i=0;i<image.length;i++){
+            let styles =  "top:"+i*40+"px;left:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+          
+       for(let i=0;i<image.length;i++){
+            let styles =  "top:"+i*40+"px";
+            str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+            div1.innerHTML=str;
+        
+    </script>
+</html>

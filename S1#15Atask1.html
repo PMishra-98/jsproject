@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title> JavaScript Stop Watch </title> 
+   </head>
+         <body> 
+            <button id="start" onclick="start()"> Start </button> 
+            <button id="stop" onclick="stop()"> Stop </button><br/>
+            <div id="output"> Time :  00.000 </div> 
+     </body>
+     <script>
+        var time=0;
+        var running=0;
+        var Time=0;
+        function start(){
+          if(running==0){
+            running=1;
+           increment();
+          }
+        }
+       function stop(){
+        
+               running=0;
+         if(Time>=0.95 && Time<=1.05){
+              alert("You stopped the clock at "+Time+", Excellent. This was awesome");
+          }
+         else if(Time>=0.9 && Time<=1.1){
+              alert("You stopped the clock at "+Time+", Very Good. Take a shot at excellen");
+          }
+         else if(Time>=0.8 && Time<=1.2){
+              alert("You stopped the clock at "+Time+", Its Ok. You can do better");
+          }
+          else{
+            alert("Not a great attempt. Try again");
+          }
+           }
+        function increment(){
+            if(running==1){
+                  setTimeout(function(){
+                      time++;
+                     
+                      var mins = Math.floor(time/10/100);
+                      var secs = Math.floor(time/10%200);
+                      
+                      if(secs<100){
+                          sece = '0'+secs;
+                      }
+                    
+                        document.getElementById('output').innerHTML="Time "+mins+"."+secs;
+                        Time = mins+"."+secs;
+                       increment();
+                  },5);
+            }
+        }
+     </script>
+ </html> 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900,900i" type="text/css" media="all">
+    <style>
+        .myImgStyle1 {
+            width: 100px;
+            height: 100px;
+            background-color: lightpink;
+        }
+        .myImgStyle2 {
+            width: 100px;
+            height: 100px;
+            background-color: lightgrey;
+        }
+    </style>
+    </head>
+    
+  
+    <body>
+        <div id="ddsample"></div>
+    </body>
+    <script>
+        let block1= [ "https://i.ibb.co/TbGXhk9/5.png",
+                        "https://i.ibb.co/gwhYdxb/8.png",
+                        "https://i.ibb.co/Lhjx85r/9.png",
+                        "https://i.ibb.co/PmGH8Vf/10.png",
+                        "https://i.ibb.co/1Xs03ds/11.png",
+                        "https://i.ibb.co/12b2XyN/12.png"];
+        let block2=[ "https://i.ibb.co/gjW4SNt/1.png",
+                        "https://i.ibb.co/db7zRQw/2.png",
+                        "https://i.ibb.co/9wjGNxz/3.png",
+                        "https://i.ibb.co/bbM4vwt/4.png",
+                        "https://i.ibb.co/GH1pQHb/6.png",
+                        "https://i.ibb.co/cv7GR1r/7.png"];
+        let dragImageIndex=-1;
+        var arr= [];
+        show();
+        function allowDrop(ev){
+            ev.preventDefault();
+        }
+        function drag(ev, dragIndex){
+            dragImageIndex =dragIndex;
+        }
+        function drop(ev, dropIndex){
+            ev.preventDefault();
+            arr.push(block2[dropIndex]);
+          block2[dropIndex] = block1[dragImageIndex];
+          if(dropIndex==dragImageIndex){
+            block1.splice( dragImageIndex,1,arr[dragImageIndex]);
+          }
+            dragImageIndex=-1;
+          
+            show();
+        }
+        function showDragImage(myIndex, img){
+            return "<img class='myImgStyle1' src='"+img+"'"+
+                          "draggable='true'"
+                         +"ondragstart='drag(event,"+myIndex+")'/>";
+        }
+        function showDropImage(myIndex, img){
+            return "<img class='myImgStyle2' src='"+img+"'"+
+                  "ondrop='drop(event,"+myIndex+")'"+
+                  "ondragover='allowDrop(event)'/>";
+        }
+        function show(){
+            let str="";
+            for(let i=0 ;i<block1.length;i++){
+                str =str+showDragImage(i,block1[i]);
+               
+             }
+            str =str+"<br/>";
+            for(let i=0 ;i<block1.length;i++){
+                
+                str =str+showDropImage(i,block2[i]);
+             }
+            
+           
+             let div1 = document.getElementById("ddsample");
+             div1.innerHTML=str;
+        }
+    </script>
+</html>

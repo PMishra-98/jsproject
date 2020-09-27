@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #dd {
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <button type="submit" onclick="randomShow()">Arrange Randomly</button>
+    <div id="dd"></div>
+</body>
+<script>
+    var photos = ["https://i.ibb.co/M98B0Pg/blackpanther.jpg",
+        "https://i.ibb.co/tD3XYST/captainamerica.jpg",
+        "https://i.ibb.co/3fFJ2BX/fantastic.jpg",
+        "https://i.ibb.co/WzhdMrf/frozen.jpg",
+        "https://i.ibb.co/s2MzrKQ/gijoe.jpg",
+        "https://i.ibb.co/m8stVHL/harrypotter.jpg",
+        "https://i.ibb.co/09X24qh/hulk.jpg",
+        "https://i.ibb.co/chb6MyP/inception.jpg",
+        "https://i.ibb.co/CsQ9KH3/interstellar.jpg",
+        "https://i.ibb.co/5Lr8kxH/ironman.jpg",
+        "https://i.ibb.co/ph5FTwr/johncarter.jpg",
+        "https://i.ibb.co/XXLnRB1/logan.jpg"];
+
+    var str = '';
+    randomShow();
+    function randomShow() {
+        for (let i = photos.length - 1; i >= 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = photos[i];
+            photos[i] = photos[j];
+            photos[j] = temp;
+        }
+
+        for (let i = 0; i < photos.length; i++) {
+            str += "<img src=" + photos[i] + " style='width:100px'>";
+        }
+        let show = document.getElementById('dd');
+        show.innerHTML = str;
+        str = '';
+    }
+
+
+
+
+
+
+</script>
+
+</html>

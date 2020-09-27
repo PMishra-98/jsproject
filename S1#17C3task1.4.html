@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        .outer{
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        .imagesize{
+            width: 100px;
+            height: 200px;
+        }
+        .overlay{
+            position: absolute;
+            z-index: 2;
+        }
+       </style>
+    </head>
+    <body>
+        <button type="submit" onclick="start()">Start Again</button>
+        <div id="show"></div>
+    </body>
+    <script>
+        let image1 = [  "https://i.ibb.co/cwwg3X4/3-red.jpg",
+                     "https://i.ibb.co/3W5YvMg/4-blue.jpg",
+                     "https://i.ibb.co/W0mTkdc/4-green.jpg",
+                     "https://i.ibb.co/gm12HXN/2-green.jpg"];
+        let image2 = [ "https://i.ibb.co/ZGJDKmt/1-red.jpg",
+                     "https://i.ibb.co/S5bRz8n/2-blue.jpg",
+                     "https://i.ibb.co/ssCTJkr/3-blue.jpg",
+                     "https://i.ibb.co/5hGS3bx/3-green.jpg"];
+        let image3 = ["https://i.ibb.co/1bPyBNx/1-blue.jpg",
+                     "https://i.ibb.co/S5bRz8n/2-blue.jpg",
+                     "https://i.ibb.co/gm12HXN/2-green.jpg",
+                     "https://i.ibb.co/1Kphcg9/4-red.jpg"];
+  let div1 = document.getElementById("show");
+      var j, temp;
+      var str='';
+      var id='';
+      var d1='drag1',d2='drag2',d3='drag3';
+      var blank="https://i.ibb.co/7V82p6m/Blank.jpg";
+      start();
+function random(image){
+    for(let i=image.length-1;i>=0;i--){
+      j = Math.floor(Math.random() * (i+1));
+      temp = image[i];
+        image[i] =image[j];
+       image[j] = temp;
+    }
+  }
+  function allowDrop(ev){
+            ev.preventDefault();
+        }
+function drag(ev, dragIndex){
+            dragImageIndex =dragIndex;
+            id=ev.target.id;
+            console.log(dragImageIndex);
+           if(dragImageIndex==0&&id==d1){
+           image1.push(blank)
+           }
+           if(dragImageIndex==0&&id==d2){
+           image2.push(blank)
+           }
+           if(dragImageIndex==0&&id==d3){
+           image3.push(blank)
+           }
+        }
+function drop1(ev,dropIndex){
+  ev.preventDefault();
+     if(d2==id){
+        image1[dropIndex]=image2[dragImageIndex];
+         image1.push(image2[dragImageIndex]);
+         image2.splice(dragImageIndex,1);
+        }
+       if(d3==id){
+        image1[dropIndex]=image3[dragImageIndex];
+         image1.push(image3[dragImageIndex]);
+         image3.splice(dragImageIndex,1);
+       }
+      
+         dragImageIndex=-1;
+           start();
+        }
+ function drop2(ev,dropIndex){
+     ev.preventDefault();
+     if(d1==id){
+        image2[dropIndex]=image1[dragImageIndex];
+         image2.push(image1[dragImageIndex]);
+         image1.splice(dragImageIndex,1);
+        }
+       if(d3==id){
+        image2[dropIndex]=image3[dragImageIndex];
+         image2.push(image3[dragImageIndex]);
+         image3.splice(dragImageIndex,1);
+       }
+        dragImageIndex=-1;
+           start();
+        }
+        function drop3(ev,dropIndex){
+        ev.preventDefault();
+        if(d1==id){
+        image3[dropIndex]=image1[dragImageIndex];
+         image3.push(image1[dragImageIndex]);
+         image1.splice(dragImageIndex,1);
+        }
+       if(d2==id){
+        image3[dropIndex]=image2[dragImageIndex];
+         image3.push(image2[dragImageIndex]);
+         image2.splice(dragImageIndex,1);
+       }
+      
+        dragImageIndex=-1;
+           start();
+        }
+    function start(){
+        str = str+"<div class='outer'>";
+          
+        for(let i=0;i<image1.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' id='drag1' src='"+image1[i]+"' style='"+styles+"' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop1(event,"+i+")' ondragover='allowDrop(event)'>";
+          
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+          
+        for(let i=0;i<image2.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' id='drag2' src='"+image2[i]+"' style='"+styles+"' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop2(event,"+i+")' ondragover='allowDrop(event)'>";
+        }
+        str = str+"</div>";
+        str =str+"<div class='outer'>";
+          
+       for(let i=0;i<image3.length;i++){
+            let styles =  "top:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' id='drag3' src='"+image3[i]+"' style='"+styles+"' draggable='true' ondragstart='drag(event,"+i+")' ondrop='drop3(event,"+i+")'  ondragover='allowDrop(event)'>";
+        }
+        str = str+"</div>";
+       div1.innerHTML=str;
+        str='';
+    }
+    </script>
+</html>

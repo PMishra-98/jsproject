@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <style>
+        .outer{
+            width: 100px;
+            margin-right: 80px;
+            position: relative;
+            display: inline-block;
+        }
+        .imagesize{
+            width: 100px;
+            height: 200px;
+        }
+        .overlay{
+            position: absolute;
+            z-index: 2;
+        }
+       </style>
+    </head>
+    <body>
+        <button type="submit" onclick="horizontal()">Horizontal</button>
+        <button type="submit" onclick="vertical()">Vertical</button>
+        <button type="submit" onclick="diagonal()">Diagonal</button>
+        <div id="show"></div>
+    </body>
+    <script>
+        let image = ["https://i.ibb.co/1bPyBNx/1-blue.jpg",
+                     "https://i.ibb.co/5k4cDYm/1-green.jpg",
+                     "https://i.ibb.co/ZGJDKmt/1-red.jpg",
+                     "https://i.ibb.co/S5bRz8n/2-blue.jpg",
+                     "https://i.ibb.co/gm12HXN/2-green.jpg",
+                     "https://i.ibb.co/VWnvwqM/2-red.jpg",
+                     "https://i.ibb.co/ssCTJkr/3-blue.jpg",
+                     "https://i.ibb.co/5hGS3bx/3-green.jpg",
+                     "https://i.ibb.co/cwwg3X4/3-red.jpg",
+                     "https://i.ibb.co/3W5YvMg/4-blue.jpg",
+                     "https://i.ibb.co/W0mTkdc/4-green.jpg",
+                     "https://i.ibb.co/1Kphcg9/4-red.jpg"];
+        let div1 = document.getElementById("show");
+        let str = "";
+      function horizontal(){
+        str = str+"<div class='outer'>";
+        for(let i=0;i<image.length;i++){
+            let styles =  "left:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+       
+      }
+     function vertical(){
+        str =str+"<div class='outer'>";
+        for(let i=0;i<image.length;i++){
+            let styles =  "top:"+i*40+"px;left:"+i*30+"px";
+            str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+        }
+        str = str+"</div>";
+     }
+    function diagonal(){
+        str =str+"<div class='outer'>";
+          
+          for(let i=0;i<image.length;i++){
+               let styles =  "top:"+i*40+"px";
+               str = str + "<img class='imagesize overlay' src='"+image[i]+"' style='"+styles+"'>";
+           }
+           str = str+"</div>";
+    }
+      
+            div1.innerHTML=str;
+        
+    </script>
+</html>

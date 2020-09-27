@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <style>
+        .cell1{
+            display: inline-block;
+            border: 1px solid lightpink;
+            margin:2px;
+
+        }
+        .img{
+            width: 100px;
+            height: 100px;
+        }   
+            
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid" >
+           <div class="cell" id="img"></div>
+           
+        </div>
+    </body>
+    <script>
+      var numberArray =["https://i.ibb.co/gjW4SNt/1.png",
+                        "https://i.ibb.co/db7zRQw/2.png",
+                        "https://i.ibb.co/9wjGNxz/3.png",
+                        "https://i.ibb.co/bbM4vwt/4.png",
+                        "https://i.ibb.co/TbGXhk9/5.png",
+                        "https://i.ibb.co/GH1pQHb/6.png",
+                        "https://i.ibb.co/cv7GR1r/7.png",
+                        "https://i.ibb.co/gwhYdxb/8.png",
+                        "https://i.ibb.co/Lhjx85r/9.png",
+                        "https://i.ibb.co/PmGH8Vf/10.png",
+                        "https://i.ibb.co/1Xs03ds/11.png",
+                        "https://i.ibb.co/12b2XyN/12.png"];  
+    
+         var image = document.getElementById('img');
+         var str="";              
+           show();            
+     function show() {
+          for (var i = 0; i < numberArray.length; i++) {
+           str += "<div class='cell1'><img class='img' src='"+numberArray[i]+"'></div>";
+
+        }
+       image.innerHTML = str;
+    }
+    </script>
+</html>
